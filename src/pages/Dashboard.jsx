@@ -6,14 +6,16 @@ import { supabase } from "../lib/supabase";
 export default function Dashboard() {
   const navigate = useNavigate();
 
-const [user, setUser] = useState(null);
-const [profile, setProfile] = useState(null);
-const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  
-  
-  
-  
+  const [financialStats, setFinancialStats] = useState({
+    income: 0,
+    expenses: 0,
+    balance: 0,
+    savings: 0,
+  });
 
   useEffect(() => {
     loadDashboard();
@@ -38,6 +40,37 @@ const [loading, setLoading] = useState(true);
       .single();
 
     setProfile(profileData);
+
+    const { data: transactions, error } = await supabase
+      .from("transactions")
+      .select("type, amount")
+      .eq("user_id", user.id);
+
+    if (!error && transactions) {
+      const income = transactions
+        .filter((item) => item.type === "income")
+        .reduce(
+          (sum, item) => sum + Number(item.amount),
+          0
+        );
+
+      const expenses = transactions
+        .filter((item) => item.type === "expense")
+        .reduce(
+          (sum, item) => sum + Number(item.amount),
+          0
+        );
+
+      const balance = income - expenses;
+
+      setFinancialStats({
+        income,
+        expenses,
+        balance,
+        savings: balance,
+      });
+    }
+
     setLoading(false);
   }
 
@@ -122,7 +155,9 @@ const [loading, setLoading] = useState(true);
             Total Balance
           </p>
 
-          <h2>₹0</h2>
+          <h2>
+            ₹{financialStats.balance.toLocaleString("en-IN")}
+          </h2>
         </div>
 
         <div
@@ -137,7 +172,7 @@ const [loading, setLoading] = useState(true);
           </p>
 
           <h2 style={{ color: "#22c55e" }}>
-            ₹0
+            ₹{financialStats.income.toLocaleString("en-IN")}
           </h2>
         </div>
 
@@ -153,7 +188,7 @@ const [loading, setLoading] = useState(true);
           </p>
 
           <h2 style={{ color: "#f87171" }}>
-            ₹0
+            ₹{financialStats.expenses.toLocaleString("en-IN")}
           </h2>
         </div>
 
@@ -169,11 +204,12 @@ const [loading, setLoading] = useState(true);
           </p>
 
           <h2 style={{ color: "#38bdf8" }}>
-            ₹0
+            ₹{financialStats.savings.toLocaleString("en-IN")}
           </h2>
         </div>
       </div>
-            <div
+
+      <div
         style={{
           marginTop: "30px",
           display: "flex",
