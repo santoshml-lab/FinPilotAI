@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -7,18 +8,56 @@ export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
-  function handleSignup(e) {
+  async function handleSignup(e) {
     e.preventDefault();
 
+    setError("");
+    setSuccess("");
+
     if (!name || !email || !password) {
-      alert("Please fill all fields.");
+      setError("Please fill all fields.");
       return;
     }
 
-    // Temporary signup.
-    // Supabase Auth next step me connect karenge.
-    navigate("/dashboard");
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+          },
+        },
+      });
+
+      if (error) {
+        setError(error.message);
+        return;
+      }
+
+      if (data?.session) {
+        navigate("/dashboard");
+      } else {
+        setSuccess(
+          "Account created! Please check your email to confirm your account."
+        );
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -52,14 +91,45 @@ export default function Signup() {
             Create your{" "}
             <span style={{ color: "#38bdf8" }}>
               FinPilot AI
-            </span>
-            {" "}account
+            </span>{" "}
+            account
           </h1>
 
           <p style={{ color: "#94a3b8" }}>
             Start managing your finances smarter.
           </p>
         </div>
+
+        {error && (
+          <div
+            style={{
+              background: "rgba(239,68,68,.1)",
+              border: "1px solid rgba(239,68,68,.3)",
+              color: "#fca5a5",
+              padding: "12px",
+              borderRadius: "10px",
+              marginBottom: "20px",
+            }}
+          >
+            ⚠️ {error}
+          </div>
+        )}
+
+        {success && (
+          <div
+            style={{
+              background: "rgba(34,197,94,.1)",
+              border: "1px solid rgba(34,197,94,.3)",
+              color: "#86efac",
+              padding: "12px",
+              borderRadius: "10px",
+              marginBottom: "20px",
+              lineHeight: "1.5",
+            }}
+          >
+            ✅ {success}
+          </div>
+        )}
 
         <form onSubmit={handleSignup}>
           <label>Full Name</label>
@@ -69,6 +139,7 @@ export default function Signup() {
             placeholder="Your name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            disabled={loading}
             style={{
               width: "100%",
               padding: "13px",
@@ -78,7 +149,6 @@ export default function Signup() {
               border: "1px solid #334155",
               background: "#020617",
               color: "white",
-              outline: "none",
             }}
           />
 
@@ -89,6 +159,7 @@ export default function Signup() {
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
             style={{
               width: "100%",
               padding: "13px",
@@ -98,7 +169,6 @@ export default function Signup() {
               border: "1px solid #334155",
               background: "#020617",
               color: "white",
-              outline: "none",
             }}
           />
 
@@ -109,6 +179,7 @@ export default function Signup() {
             placeholder="Create a password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
             style={{
               width: "100%",
               padding: "13px",
@@ -118,25 +189,25 @@ export default function Signup() {
               border: "1px solid #334155",
               background: "#020617",
               color: "white",
-              outline: "none",
             }}
           />
 
           <button
             type="submit"
+            disabled={loading}
             style={{
               width: "100%",
               padding: "14px",
-              background: "#2563eb",
+              background: loading ? "#475569" : "#2563eb",
               color: "white",
               border: "none",
               borderRadius: "10px",
               fontSize: "16px",
               fontWeight: 600,
-              cursor: "pointer",
+              cursor: loading ? "not-allowed" : "pointer",
             }}
           >
-            🚀 Create Account
+            {loading ? "⏳ Creating account..." : "🚀 Create Account"}
           </button>
         </form>
 
