@@ -5,6 +5,7 @@ import RecentTransactions from "../components/RecentTransactions";
 import IncomeExpenseChart from "../components/IncomeExpenseChart";
 import SpendingByCategory from "../components/SpendingByCategory";
 import MonthlySummary from "../components/MonthlySummary";
+import AIInsight from "../components/AIInsight";
 
 
 export default function Dashboard() {
@@ -238,25 +239,25 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <div
-        style={{
-          marginTop: "30px",
-          background: "#1e293b",
-          padding: "25px",
-          borderRadius: "16px",
-        }}
-      >
+      
+        
+          
+          
+          
+          
+      
+      
         <SpendingByCategory />
         <MonthlySummary />
         <IncomeExpenseChart />
         <RecentTransactions />
-        <h2>🤖 AI Financial Insight</h2>
+        <AIInsight />
 
-        <p style={{ color: "#94a3b8" }}>
-          Add your income and expenses to start receiving
-          personalized financial insights.
-        </p>
-      </div>
+        
+          
+          
+        
+      
     </div>
   );
 }
