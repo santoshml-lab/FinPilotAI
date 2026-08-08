@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import RecentTransactions from "../components/RecentTransactions";
+import IncomeExpenseChart from "../components/IncomeExpenseChart";
 
 
 export default function Dashboard() {
@@ -243,6 +244,7 @@ export default function Dashboard() {
           borderRadius: "16px",
         }}
       >
+        <IncomeExpenseChart />
         <RecentTransactions />
         <h2>🤖 AI Financial Insight</h2>
 
