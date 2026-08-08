@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 
 function ComingSoon({ title }) {
   return (
@@ -39,9 +40,12 @@ export default function App() {
 
       {/* Dashboard - temporary */}
       <Route
-        path="/dashboard"
-        element={<ComingSoon title="📊 Dashboard" />}
-      />
+  path="/dashboard"
+  element={<Dashboard />}
+/>
+        
+        
+      
 
       {/* Unknown routes */}
       <Route
