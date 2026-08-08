@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabase";
 import RecentTransactions from "../components/RecentTransactions";
 import IncomeExpenseChart from "../components/IncomeExpenseChart";
 import SpendingByCategory from "../components/SpendingByCategory";
+import MonthlySummary from "../components/MonthlySummary";
 
 
 export default function Dashboard() {
@@ -246,6 +247,7 @@ export default function Dashboard() {
         }}
       >
         <SpendingByCategory />
+        <MonthlySummary />
         <IncomeExpenseChart />
         <RecentTransactions />
         <h2>🤖 AI Financial Insight</h2>
