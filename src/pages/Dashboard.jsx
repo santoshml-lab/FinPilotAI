@@ -6,10 +6,14 @@ import { supabase } from "../lib/supabase";
 export default function Dashboard() {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+const [user, setUser] = useState(null);
+const [profile, setProfile] = useState(null);
+const [loading, setLoading] = useState(true);
+
+  
+  
+  
+  
 
   useEffect(() => {
     loadDashboard();
@@ -168,6 +172,30 @@ export default function Dashboard() {
             ₹0
           </h2>
         </div>
+      </div>
+            <div
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          gap: "15px",
+          flexWrap: "wrap",
+        }}
+      >
+        <button
+          onClick={() => navigate("/add-transaction")}
+          style={{
+            padding: "15px 22px",
+            border: "none",
+            borderRadius: "12px",
+            background: "#2563eb",
+            color: "white",
+            fontSize: "16px",
+            fontWeight: "600",
+            cursor: "pointer",
+          }}
+        >
+          ➕ Add Transaction
+        </button>
       </div>
 
       <div
