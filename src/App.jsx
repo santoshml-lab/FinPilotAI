@@ -1,5 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+
 import LandingPage from "./pages/LandingPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function ComingSoon({ title }) {
   return (
@@ -27,23 +30,20 @@ function ComingSoon({ title }) {
 export default function App() {
   return (
     <Routes>
+      {/* Landing Page */}
       <Route path="/" element={<LandingPage />} />
 
-      <Route
-        path="/login"
-        element={<ComingSoon title="🔐 Login" />}
-      />
+      {/* Authentication */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
 
-      <Route
-        path="/signup"
-        element={<ComingSoon title="🚀 Create Account" />}
-      />
-
+      {/* Dashboard - temporary */}
       <Route
         path="/dashboard"
         element={<ComingSoon title="📊 Dashboard" />}
       />
 
+      {/* Unknown routes */}
       <Route
         path="*"
         element={<Navigate to="/" replace />}
