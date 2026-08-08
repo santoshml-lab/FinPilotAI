@@ -1,23 +1,44 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 
 export default function Login() {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault();
 
-    // Temporary login
-    // Supabase authentication next step me connect karenge.
+    setError("");
+
     if (!email || !password) {
-      alert("Please enter email and password.");
+      setError("Please enter email and password.");
       return;
     }
 
-    navigate("/dashboard");
+    try {
+      setLoading(true);
+
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        setError(error.message);
+        return;
+      }
+
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -59,6 +80,22 @@ export default function Login() {
           </p>
         </div>
 
+        {error && (
+          <div
+            style={{
+              background: "rgba(239,68,68,.1)",
+              border: "1px solid rgba(239,68,68,.3)",
+              color: "#fca5a5",
+              padding: "12px",
+              borderRadius: "10px",
+              marginBottom: "20px",
+              fontSize: "14px",
+            }}
+          >
+            ⚠️ {error}
+          </div>
+        )}
+
         <form onSubmit={handleLogin}>
           <label>Email</label>
 
@@ -67,6 +104,7 @@ export default function Login() {
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
             style={{
               width: "100%",
               padding: "13px",
@@ -87,6 +125,7 @@ export default function Login() {
             placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
             style={{
               width: "100%",
               padding: "13px",
@@ -102,19 +141,20 @@ export default function Login() {
 
           <button
             type="submit"
+            disabled={loading}
             style={{
               width: "100%",
               padding: "14px",
-              background: "#2563eb",
+              background: loading ? "#475569" : "#2563eb",
               color: "white",
               border: "none",
               borderRadius: "10px",
               fontSize: "16px",
               fontWeight: 600,
-              cursor: "pointer",
+              cursor: loading ? "not-allowed" : "pointer",
             }}
           >
-            🔐 Sign In
+            {loading ? "⏳ Signing in..." : "🔐 Sign In"}
           </button>
         </form>
 
@@ -156,4 +196,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
+            }
