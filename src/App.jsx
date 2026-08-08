@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
 
-function Home() {
+function ComingSoon({ title }) {
   return (
     <div
       style={{
@@ -11,23 +12,12 @@ function Home() {
         alignItems: "center",
         justifyContent: "center",
         textAlign: "center",
-        padding: "30px",
       }}
     >
       <div>
-        <div style={{ fontSize: "60px" }}>💰</div>
-
-        <h1 style={{ fontSize: "48px", margin: "10px 0" }}>
-          FinPilot <span style={{ color: "#38bdf8" }}>AI</span>
-        </h1>
-
-        <p
-          style={{
-            color: "#94a3b8",
-            fontSize: "18px",
-          }}
-        >
-          Your AI-powered personal finance command center.
+        <h1>{title}</h1>
+        <p style={{ color: "#94a3b8" }}>
+          FinPilot AI — Coming Soon 🚀
         </p>
       </div>
     </div>
@@ -37,7 +27,22 @@ function Home() {
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<LandingPage />} />
+
+      <Route
+        path="/login"
+        element={<ComingSoon title="🔐 Login" />}
+      />
+
+      <Route
+        path="/signup"
+        element={<ComingSoon title="🚀 Create Account" />}
+      />
+
+      <Route
+        path="/dashboard"
+        element={<ComingSoon title="📊 Dashboard" />}
+      />
 
       <Route
         path="*"
