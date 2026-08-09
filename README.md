@@ -72,6 +72,13 @@ Users can refresh their AI insight whenever they want.
 
 ### 📱 Responsive Experience
 Designed to work across desktop, tablet, and mobile screens.
+## 🌐 Live Demo
+
+**Frontend:**  
+https://fin-pilot-ai-lac.vercel.app/
+
+**Backend:**  
+https://finpilotai-2s9v.onrender.com
 
 ---
 
