@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 
-const API_URL = "YOUR_RENDER_BACKEND_URL";
+const API_URL = "https://finpilotai-2s9v.onrender.com";
 
 export default function AIInsight() {
   const [insight, setInsight] = useState("");
