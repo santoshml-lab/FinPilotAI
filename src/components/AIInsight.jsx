@@ -128,6 +128,24 @@ export default function AIInsight() {
       <h2 style={{ marginTop: 0 }}>
         🤖 AI Financial Insight
       </h2>
+      <button
+  onClick={generateInsight}
+  disabled={loading}
+  style={{
+    marginTop: "10px",
+    marginBottom: "20px",
+    padding: "10px 16px",
+    border: "none",
+    borderRadius: "10px",
+    background: loading ? "#475569" : "#2563eb",
+    color: "white",
+    fontSize: "14px",
+    fontWeight: "600",
+    cursor: loading ? "not-allowed" : "pointer",
+  }}
+>
+  {loading ? "🤖 Analyzing..." : "🔄 Refresh AI Insight"}
+</button>
 
       {loading ? (
         <p style={{ color: "#94a3b8" }}>
