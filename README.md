@@ -1,4 +1,15 @@
 # 💰 FinPilot AI
+<p align="center">
+
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Fast-646CFF?logo=vite&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-Database-3ECF8E?logo=supabase&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq-AI-orange)
+![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?logo=vercel)
+![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?logo=render)
+
+</p>
 
 <p align="center">
   <strong>AI-Powered Personal Finance Management & Insights Platform</strong>
