@@ -96,3 +96,136 @@ Designed to work across desktop, tablet, and mobile screens.
 │ Personalized AI      │
 │ Financial Insight    │
 └──────────────────────┘
+
+🛠️ Tech Stack
+Frontend
+React
+Vite
+JavaScript
+React Router
+Recharts
+Backend
+Python
+FastAPI
+Uvicorn
+Groq API
+Database & Authentication
+Supabase
+PostgreSQL
+Supabase Authentication
+Row Level Security
+Deployment
+Vercel
+Render
+📊 Dashboard Analytics
+FinPilot AI converts transaction data into useful financial metrics.
+Income
+   +
+Expenses
+   ↓
+Financial Summary
+   ↓
+Balance & Savings
+   ↓
+Spending Analysis
+   ↓
+AI Financial Insight
+The dashboard provides a quick overview of the user's current financial activity.
+🤖 AI Financial Insight System
+The AI system follows this process:
+User Transactions
+       ↓
+Calculate Income
+       ↓
+Calculate Expenses
+       ↓
+Calculate Savings
+       ↓
+Find Highest Spending Category
+       ↓
+Send Summary to FastAPI
+       ↓
+Groq AI
+       ↓
+Generate Financial Insight
+
+FinPilotAI/
+│
+├── public/
+│
+├── src/
+│   │
+│   ├── components/
+│   │   └── AIInsight.jsx
+│   │
+│   ├── pages/
+│   │   ├── Dashboard.jsx
+│   │   ├── Login.jsx
+│   │   ├── Signup.jsx
+│   │   └── AddTransaction.jsx
+│   │
+│   └── lib/
+│       └── supabase.js
+│
+├── package.json
+├── vite.config.js
+└── README.md
+
+FinPilotAI-Backend/
+│
+├── main.py
+├── requirements.txt
+├── .env.example
+└── README.md
+🎯 Project Goals
+FinPilot AI was built to explore how modern technologies can work together to create a practical full-stack AI application.
+The project demonstrates:
+Frontend development
+Backend API development
+Authentication
+Database integration
+Row Level Security
+Data analytics
+AI integration
+Cloud deployment
+🔮 Future Improvements
+Planned improvements include:
+💰 AI Budget Recommendations
+📅 Monthly AI Financial Reports
+🚨 Smart Spending Alerts
+🎯 Financial Goal Tracking
+📄 PDF Financial Reports
+📈 Advanced Spending Forecasts
+🧠 More Personalized AI Recommendations
+📊 Advanced Financial Analytics
+🎥 Demo
+A complete project demonstration will showcase:
+Login
+  ↓
+Dashboard
+  ↓
+Add Transaction
+  ↓
+Financial Analytics
+  ↓
+Recent Transactions
+  ↓
+AI Financial Insight
+  ↓
+Refresh AI Insight
+💡 Why FinPilot AI?
+Traditional expense trackers mainly show numbers.
+FinPilot AI goes one step further:
+Raw Financial Data
+        ↓
+Analytics
+        ↓
+AI Understanding
+        ↓
+Practical Insight
+The goal is to make financial data easier to understand and act upon.
+👨‍💻 Built As a Learning & Portfolio Project
+FinPilot AI is a portfolio project focused on full-stack development, cloud databases, analytics, and generative AI.
+It was built step-by-step with a focus on creating a real, working product rather than a static UI concept.
+⭐ Support
+If you find FinPilot AI interesting, consider giving the repository a ⭐ star.
